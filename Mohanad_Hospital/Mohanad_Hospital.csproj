@@ -20,4 +20,8 @@
     <ProjectReference Include="..\Hospita.DataAccess\Hospital.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\Doctors\" />
+  </ItemGroup>
+
 </Project>

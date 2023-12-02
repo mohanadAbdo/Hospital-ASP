@@ -4,6 +4,7 @@ using Hospital.DataAccess.Data;
 using Hospital.Models;
 using Hospital.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Hospital.Models.ViewModels;
 
 namespace Mohanad_Hospital.Areas.Admin.Controllers
 {
@@ -22,59 +23,43 @@ namespace Mohanad_Hospital.Areas.Admin.Controllers
 
             return View(objDoctorList);
         }
-        public IActionResult Create()
+        public IActionResult Upsert(int? id)
         {
-            IEnumerable<SelectListItem> CategoryList = _unitofwork.Category.
-             GetAll().Select(u => new SelectListItem
-                {
-             Text = u.Name,
-             Value = u.Id.ToString()
+            DoctorViewModel doctorVM = new()
+            {
+                CategoryList = _unitofwork.Category.GetAll().Select(u => new SelectListItem
+             {
+                 Text = u.Name,
+                 Value = u.Id.ToString()
              }
-                );
-            // ViewBag.CategoryList = CategoryList;
-            ViewData["CategoryList"] = CategoryList;
-            return View();
+                ),
+                Doctor = new Doctor()
+            };
+            if(id==null || id == 0)
+            {
+                //Create
+                return View(doctorVM);
+
+            }
+            else
+            {
+                //Update
+                doctorVM.Doctor = _unitofwork.Doctor.Get(u => u.Id == id);
+                return View(doctorVM); 
+            }
         }
         [HttpPost]
-        public IActionResult Create(Doctor obj)
+        public IActionResult Upsert(DoctorViewModel doctorVM , IFormFile? file)
         {
             if (ModelState.IsValid)
             {
-                _unitofwork.Doctor.Add(obj);
+                _unitofwork.Doctor.Add(doctorVM.Doctor);
                 _unitofwork.Save();
                 return RedirectToAction("Index", "Doctor");
             }
             return View();
         }
-        public IActionResult Edit(int? id)
-        {
-            // Assuming 'id' is a parameter passed into this code block
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            Doctor? DoctorFromDb = _unitofwork.Doctor.Get(u => u.Id == id);
-
-            if (DoctorFromDb == null)
-            {
-                return NotFound();
-            }
-
-            return View(DoctorFromDb);
-
-        }
-        [HttpPost]
-        public IActionResult Edit(Doctor obj)
-        {
-            if (ModelState.IsValid)
-            {
-                _unitofwork.Doctor.Update(obj);
-                _unitofwork.Save();
-                return RedirectToAction("Index", "Doctor");
-            }
-            return View();
-        }
+       
         public IActionResult Delete(int? id)
         {
             // Assuming 'id' is a parameter passed into this code block
