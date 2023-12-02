@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
-namespace Mohanad_Hospital.Models
+namespace Hospital.Models
 {
     public class Category
     {
@@ -8,7 +9,8 @@ namespace Mohanad_Hospital.Models
         public int Id { get; set; }
 
         public string Name { get; set; }
-
+        [DisplayName("Display order")]
+        [Range(1,100)]
         public int DisplayOrder { get; set; }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Mohanad_Hospital.Models;
+using Hospital.Models;
 using System.Diagnostics;
 
 namespace Mohanad_Hospital.Controllers
