@@ -3,16 +3,18 @@ using Hospital.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Hospita.DataAccess.Migrations
+namespace Hospital.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231202192213_addForeignKeyForCategoryProductRelation")]
+    partial class addForeignKeyForCategoryProductRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,10 +81,6 @@ namespace Hospita.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
@@ -95,16 +93,14 @@ namespace Hospita.DataAccess.Migrations
                             Id = 1,
                             CategoryId = 1,
                             DoctorId = 0,
-                            DoctorName = "Mohanad",
-                            ImageUrl = ""
+                            DoctorName = "Mohanad"
                         },
                         new
                         {
                             Id = 2,
                             CategoryId = 1,
                             DoctorId = 0,
-                            DoctorName = "Mohanad2",
-                            ImageUrl = ""
+                            DoctorName = "Mohanad2"
                         });
                 });
 

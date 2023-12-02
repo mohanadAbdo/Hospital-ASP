@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Hospital.DataAccess.Repository.IRepository
 {
-    public interface ICategoryRepository : IRepository<Category>
+    public interface IDoctorRepository : IRepository<Doctor>
     {
-        void Update(Category obj);
+        void Update(Doctor obj);
         
     }
 }

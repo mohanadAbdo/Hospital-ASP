@@ -4,19 +4,20 @@ using Hospital.DataAccess.Data;
 using Hospital.Models;
 using Hospital.DataAccess.Repository.IRepository;
 
-namespace Mohanad_Hospital.Controllers
+namespace Mohanad_Hospital.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
-        private readonly  ICategoryRepository _categoryRepo;
-        public CategoryController(ICategoryRepository db)
+        private readonly IUnitOfWork _unitofwork;
+        public CategoryController(IUnitOfWork unitOfWork)
         {
-            _categoryRepo = db;
-        
+            _unitofwork = unitOfWork;
+
         }
         public IActionResult Index()
         {
-            var objCategoryList = _categoryRepo.GetAll().ToList();
+            var objCategoryList = _unitofwork.Category.GetAll().ToList();
             return View(objCategoryList);
         }
         public IActionResult Create()
@@ -28,8 +29,8 @@ namespace Mohanad_Hospital.Controllers
         {
             if (ModelState.IsValid)
             {
-                _categoryRepo.Add(obj);
-                _categoryRepo.Save();
+                _unitofwork.Category.Add(obj);
+                _unitofwork.Save();
                 return RedirectToAction("Index", "Category");
             }
             return View();
@@ -42,7 +43,7 @@ namespace Mohanad_Hospital.Controllers
                 return NotFound();
             }
 
-            Category? categoryFromDb = _categoryRepo.Get(u=>u.Id==id);
+            Category? categoryFromDb = _unitofwork.Category.Get(u => u.Id == id);
 
             if (categoryFromDb == null)
             {
@@ -57,8 +58,8 @@ namespace Mohanad_Hospital.Controllers
         {
             if (ModelState.IsValid)
             {
-                _categoryRepo.Update(obj);
-                _categoryRepo.Save();
+                _unitofwork.Category.Update(obj);
+                _unitofwork.Save();
                 return RedirectToAction("Index", "Category");
             }
             return View();
@@ -71,7 +72,7 @@ namespace Mohanad_Hospital.Controllers
                 return NotFound();
             }
 
-            Category? categoryFromDb = _categoryRepo.Get(u => u.Id == id);
+            Category? categoryFromDb = _unitofwork.Category.Get(u => u.Id == id);
 
             if (categoryFromDb == null)
             {
@@ -81,18 +82,18 @@ namespace Mohanad_Hospital.Controllers
             return View(categoryFromDb);
 
         }
-        [HttpPost , ActionName("Delete")]
+        [HttpPost, ActionName("Delete")]
         public IActionResult DeletePost(int? id)
         {
-            Category? obj = _categoryRepo.Get(u => u.Id == id);
-            _categoryRepo.Delete(obj);
-            _categoryRepo.Save();
+            Category? obj = _unitofwork.Category.Get(u => u.Id == id);
+            _unitofwork.Category.Delete(obj);
+            _unitofwork.Save();
             if (obj == null)
             {
                 return NotFound();
             }
-           
-                return RedirectToAction("Index", "Category");
+
+            return RedirectToAction("Index", "Category");
 
         }
     }
