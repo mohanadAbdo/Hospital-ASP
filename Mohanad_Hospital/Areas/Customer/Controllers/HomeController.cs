@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Hospital.Models;
 using System.Diagnostics;
+using Hospital.DataAccess.Repository.IRepository;
 
 namespace Mohanad_Hospital.Areas.Customer.Controllers
 {
@@ -8,15 +9,17 @@ namespace Mohanad_Hospital.Areas.Customer.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IUnitOfWork _unitOfWork;
+        public HomeController(ILogger<HomeController> logger,IUnitOfWork unitOfWork)
         {
             _logger = logger;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<Doctor> doctorList = _unitOfWork.Doctor.GetAll(includeProperties:"Category");
+            return View(doctorList);
         }
 
         public IActionResult Privacy()

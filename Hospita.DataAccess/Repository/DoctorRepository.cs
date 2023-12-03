@@ -20,7 +20,16 @@ namespace Hospital.DataAccess.Repository
 
         public void Update(Doctor obj)
         {
-            _db.Doctors.Update(obj);
+            var objFromDb = _db.Doctors.FirstOrDefault(u => u.Id == obj.Id);
+            if (objFromDb != null)
+            {
+                objFromDb.DoctorName = obj.DoctorName;
+                objFromDb.CategoryId = obj.CategoryId;
+                if(obj.ImageUrl != null)
+                {
+                    objFromDb.ImageUrl = obj.ImageUrl;
+                }
+            }
         }
     }
 }
