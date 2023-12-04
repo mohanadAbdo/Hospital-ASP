@@ -3,10 +3,13 @@ using Hospital.DataAccess.Data;
 
 using Hospital.Models;
 using Hospital.DataAccess.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
+using Hospital.Utility;
 
 namespace Mohanad_Hospital.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles =SD.Admin_Role)]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitofwork;

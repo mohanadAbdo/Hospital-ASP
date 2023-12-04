@@ -6,10 +6,14 @@ using Hospital.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Hospital.Models.ViewModels;
 using Microsoft.DotNet.Scaffolding.Shared.Messaging;
+using Hospital.Utility;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Mohanad_Hospital.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Admin_Role)]
+
     public class DoctorController : Controller
     {
         private readonly IUnitOfWork _unitofwork;
