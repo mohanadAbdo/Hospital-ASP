@@ -10,6 +10,8 @@ namespace Hospital.DataAccess.Repository.IRepository
     {
         ICategoryRepository Category { get; }
         IDoctorRepository Doctor { get; }
+        IAppointmentRepository Appointment { get; }
+        IApplicationUserRepository ApplicationUser { get; }
         void Save();
     }
 }
