@@ -18,8 +18,13 @@ namespace Mohanad_Hospital.Areas.Customer.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Doctor> doctorList = _unitOfWork.Doctor.GetAll(includeProperties:"Category");
+            IEnumerable<Doctor> doctorList = _unitOfWork.Doctor.GetAll(includeProperties: "Category");
             return View(doctorList);
+        }
+        public IActionResult Details(int doctorId)
+        {
+            Doctor doctor = _unitOfWork.Doctor.Get(u=>u.Id== doctorId, includeProperties: "Category");
+            return View(doctor);
         }
 
         public IActionResult Privacy()

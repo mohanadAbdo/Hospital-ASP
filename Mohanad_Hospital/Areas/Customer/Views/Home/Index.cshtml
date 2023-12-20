@@ -13,6 +13,11 @@
                             <p class="card—title text—warning text—center">@doctor.Category.Name</p>
                         </div>
                     </div>
+                    <a asp-action="Details"
+                      asp-route-doctorId="@doctor.Id"
+                    class="btn btn-primary bg-gradient border-0 form-control" >
+                        Details
+                    </a> 
                 </div>
             </div>
         </div>
