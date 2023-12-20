@@ -20,6 +20,6 @@ namespace Hospital.Models
         [ForeignKey("ApllicationUserID")]
         [ValidateNever]
         public ApplicationUser ApllicationUser { get; set; }
-
+        public Doctor Doctor { get; set; }
     }
 }

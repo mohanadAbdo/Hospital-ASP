@@ -2,6 +2,8 @@
 using Hospital.Models;
 using System.Diagnostics;
 using Hospital.DataAccess.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace Mohanad_Hospital.Areas.Customer.Controllers
 {
@@ -23,8 +25,41 @@ namespace Mohanad_Hospital.Areas.Customer.Controllers
         }
         public IActionResult Details(int doctorId)
         {
-            Doctor doctor = _unitOfWork.Doctor.Get(u=>u.Id== doctorId, includeProperties: "Category");
-            return View(doctor);
+            Appointment appointment = new()
+            {
+                Doctor = _unitOfWork.Doctor.Get(u => u.Id == doctorId, includeProperties: "Category"),
+
+                DoctorId = doctorId
+
+            };
+
+            return View(appointment);
+        }
+        [HttpPost]
+        [Authorize]
+        public IActionResult Details(Appointment appointment)
+        {
+         
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            appointment.ApllicationUserID = userId;
+            Appointment appoinmentFromDb = _unitOfWork.Appointment.Get(u=>u.ApllicationUserID == userId&&
+            u.DoctorId == appointment.DoctorId);
+            if(appoinmentFromDb != null) 
+            {
+                _unitOfWork.Appointment.Update(appoinmentFromDb);
+
+            }
+            else
+            {
+                _unitOfWork.Appointment.Add(appointment);
+            }
+
+            
+            _unitOfWork.Save(); 
+           
+
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Privacy()
