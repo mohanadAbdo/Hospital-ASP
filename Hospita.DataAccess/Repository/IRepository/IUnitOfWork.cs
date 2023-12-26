@@ -12,6 +12,8 @@ namespace Hospital.DataAccess.Repository.IRepository
         IDoctorRepository Doctor { get; }
         IAppointmentRepository Appointment { get; }
         IApplicationUserRepository ApplicationUser { get; }
+        IAppointmentDetailRepository AppointmentDetail { get; }
+        IAppointmentHeaderRepository AppointmentHeader { get; }
         void Save();
     }
 }

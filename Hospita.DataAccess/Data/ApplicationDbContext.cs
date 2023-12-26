@@ -14,8 +14,9 @@ namespace Hospital.DataAccess.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
-
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<AppointmentHeader> AppointmentHeaders { get; set; }
+        public DbSet<AppointmentDetail> AppointmentDetails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

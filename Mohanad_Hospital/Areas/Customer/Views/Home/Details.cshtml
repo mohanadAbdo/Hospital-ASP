@@ -1,39 +1,56 @@
 ﻿@model Appointment
 <form method="post">
     <input hidden asp-for="DoctorId" />
-    <div class="card container pt-4">
-
-        <div class="card-body row container">
-            <div class="container rounded p-2">
-                <div class="row">
-                    <div class="card-header bg-primary text-light ml-0 row">
-                        <div class="col-12 col-md-6">
-                            <h1 class="text-white-50">@Model.Doctor.DoctorName</h1>
-                            <p class="text-warning">Doctor ID: @Model.DoctorId</p>
-                        </div>
-                        <div class="col-12 col-lg-3 offset-lg-1 text-center">
-                            <img src="@Model.Doctor.ImageUrl" width="100%" class="rounded" />
-                        </div>
-                    </div>
+    <div class="card shadow border-0 mt-4">
+        <div class="card-header bg-secondary bg-gradient text-light py-4">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h3 class="text-white text-uppercase">EMPTY SECTION PLEASE FILL IT</h3>
+                    <p class="text-white-50 fw-semibold mb-0">NOT IMPORTANT TO FILL HERE</p>
                 </div>
             </div>
         </div>
-        <div class="card-footer">
-            <div class="row">
-                <div class="col-12 col-md-6 pb-1">
-                    <a class="btn btn-success form-control" style="height:50px;" asp-action="Index">Back to Home</a>
-                </div>
-                <div class="col-12 col-md-6 pb-1">
-                    <div class="form-group">
-                        <label for="appointmentTime">Select Appointment Time:</label>
-                        <select class="form-control" id="appointmentTime" name="appointmentTime">
-                            <option value="9:00 AM">9:00 AM</option>
-                            <option value="10:00 AM">10:00 AM</option>
-                            <option value="11:00 AM">11:00 AM</option>
-                            <!-- Add more time options as needed -->
-                        </select>
+        <div class="card-body">
+            <div class="py-3">
+                <div class="row">
+                    <div class="col-6 col-md-2 offset-lg-1 pb-1">
+                        <a class="btn btn-outline-primary bg-gradient mb-5 fw-semibold btn-sm text-uppercase">
+                            <small>Back to home</small>
+                        </a>
                     </div>
-                    <button type="submit" value="Doctor Appointment" class="btn btn-primary form-control" style="height:50px;">Doctor Appointment</button>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-lg-3 offset-lg-1 text-center mb-3">
+                        <img src="@Model.Doctor.ImageUrl" width="100%" class="rounded" />
+                    </div>
+                    <div class="col-12 col-lg-6 offset-lg-1">
+
+                        <div class="col-12 col-md-6 pb-4">
+                            <span class="badge">aid : @Model.Doctor.Category.Name </span>
+                        </div>
+                        <div class="row ps-2">
+                            <h6 class="text-dark text-opacity-50 ">Name : @Model.Doctor.DoctorName</h6>
+                        </div>
+                        <div class="row pl-2 my-3">
+                            <p class="text-secondary lh-sm">Description</p>
+                        </div>
+                        <div class="row pl-2 mb-3">
+                            <div class="col-md-4">
+                                <div class="input-group mb-3">
+                            </div>
+                        </div>
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <div class="d-flex justify-content-center">
+                                        <a  <a asp-controller="Appointment" asp-action="AppointmentSummary" class="btn btn-primary btn-lg w-100">
+                                            Summary
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div>
+
                 </div>
             </div>
         </div>

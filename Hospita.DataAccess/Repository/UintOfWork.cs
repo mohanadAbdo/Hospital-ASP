@@ -15,6 +15,8 @@ namespace Hospital.DataAccess.Repository
         public ICategoryRepository Category { get; private set; }
         public IDoctorRepository Doctor { get; private set; }
         public IApplicationUserRepository ApplicationUser { get; private set; }
+        public IAppointmentHeaderRepository AppointmentHeader { get; private set; }
+        public IAppointmentDetailRepository AppointmentDetail { get; private set; }
         private ApplicationDbContext _db;
         public UintOfWork(ApplicationDbContext db)
         {
@@ -23,6 +25,8 @@ namespace Hospital.DataAccess.Repository
             Category = new CategoryRepository(_db);
             Doctor = new DoctorRepository(_db);
             Appointment = new AppointmentRepository(_db);
+            AppointmentDetail = new AppointmentDetailRepository(_db);
+            AppointmentHeader = new AppointmentHeaderRepository(_db);
         }
 
         public void Save()
