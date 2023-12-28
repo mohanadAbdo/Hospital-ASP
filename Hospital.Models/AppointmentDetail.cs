@@ -13,7 +13,7 @@ namespace Hospital.Models
     {
         public int Id { get; set; }
         [Required]
-        public int OrderHeaderId { get; set; }
+        public int AppointmentHeaderId { get; set; }
         [ForeignKey("OrderHeaderId")]
         [ValidateNever]
         public AppointmentHeader AppointmentHeader { get; set; }

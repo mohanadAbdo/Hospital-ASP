@@ -21,5 +21,6 @@ namespace Hospital.Models
         [ValidateNever]
         public ApplicationUser ApllicationUser { get; set; }
         public Doctor Doctor { get; set; }
+        public int Price { get; set; }
     }
 }

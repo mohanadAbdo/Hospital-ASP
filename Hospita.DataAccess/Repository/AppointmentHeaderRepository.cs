@@ -22,5 +22,33 @@ namespace Hospital.DataAccess.Repository
         {
             _db.AppointmentHeaders.Update(obj);
         }
+
+        public void UpdateStatus(int id, string appointmentStatus, string? paymentStatus = null)
+        {
+            var appointmentFromDb  = _db.AppointmentHeaders.FirstOrDefault(u => u.Id == id);
+            if (appointmentFromDb != null)
+            {
+                appointmentFromDb.ApoointmentStatus = appointmentStatus;
+                if (!string.IsNullOrEmpty(paymentStatus))
+                {
+                    appointmentFromDb.PaymentStatus = paymentStatus;
+                }
+            }
+
+        }
+
+        public void UpdateStripePaymentID(int id, string sessionId, string paymentIntentId)
+        {
+            var appointmentFromDb = _db.AppointmentHeaders.FirstOrDefault(u => u.Id == id);
+            if (!string.IsNullOrEmpty(sessionId))
+            {
+                appointmentFromDb.SessionId = sessionId;
+            }
+            if (!string.IsNullOrEmpty(paymentIntentId))
+            {
+                appointmentFromDb.PaymentIntentId = paymentIntentId;
+                appointmentFromDb.PaymentDate = DateTime.Now;
+            }
+        }
     }
 }

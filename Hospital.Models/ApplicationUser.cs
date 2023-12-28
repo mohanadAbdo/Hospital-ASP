@@ -7,12 +7,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 namespace Hospital.Models
 {
-    public class ApplicationUser:IdentityUser
-    {
-        [Required]
-        public int Name { get; set; }
-        public string? City { get; set; }
-        public string? Region { get; set; }
+    public  class ApplicationUser:IdentityUser {
+
+        public string TheName {  get; set; }
         public string? Number { get; set; }
-    }
+        public string? Region {  get; set; }
+        public string? City { get; set; }
+        
+        
+
+    
+    } 
 }

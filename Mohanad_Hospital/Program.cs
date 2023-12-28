@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Hospital.Utility;
 using Microsoft.Extensions.Options;
-
+using Stripe;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -14,7 +14,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-
+builder.Services.Configure<StripeUtility>(builder.Configuration.GetSection("Stripe"));
 
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<IEmailSender,EmailSender>();
@@ -46,7 +46,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 app.UseAuthentication();;
-
+StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
 app.UseAuthorization();
 app.MapRazorPages();
 app.MapControllerRoute(
