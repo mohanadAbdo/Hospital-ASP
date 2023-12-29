@@ -9,7 +9,7 @@ namespace Hospital.Models.ViewModels
 {
     public class ConfirmationVM
     {
-        public AppointmentHeader appointmentHeader {  get; set; }
-        public IEnumerable<AppointmentDetail> appointmentDetail { get; set; }
+        public AppointmentHeader AppointmentHeader {  get; set; }
+        public IEnumerable<AppointmentDetail> AppointmentDetail { get; set; }
     }
 }

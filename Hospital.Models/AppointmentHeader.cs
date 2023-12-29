@@ -39,7 +39,7 @@ namespace Hospital.Models
 
         public string? PaymentStatus { get; set; }
 
-
+        public string? Email {  get; set; }
 
     }
 }
