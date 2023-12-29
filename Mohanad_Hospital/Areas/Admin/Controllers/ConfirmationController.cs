@@ -5,7 +5,7 @@ using Hospital.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+
 
 namespace Mohanad_Hospital.Areas.Admin.Controllers
 {
