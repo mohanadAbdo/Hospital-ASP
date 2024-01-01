@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -23,27 +24,64 @@
                     <ul class="navbar-nav me-auto">
                         @if (User.IsInRole(SD.Admin_Role))
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Category" asp-action="Index">Category</a>
-                            </li>
+                        <li class="nav-item dropdown">
                            
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Doctor" asp-action="Index">Doctors</a>
+
+                                <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Sections
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Category" asp-action="Index">Clinics</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Doctor" asp-action="Index">Doctors</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Confirmation" asp-action="Index">Management</a>
+
+                                </div>
+                                </li>
+                            }
+                            <li>
+                            <div class="dropdown" >
+                                <button type="button"
+                                    class="btn btn-primary dropdown-toggle"
+                                    data-bs-toggle="dropdown">Localization
+                                
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a asp-controller="Home"
+                                           asp-action="ChangeLanguage"
+                                           asp-route-culture="en-US"
+                                           class="dropdown-item">
+                                            <i class="flag-icin flag-icon-gb"></i>English
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="Home"
+                                           asp-action="ChangeLanguage"
+                                           asp-route-culture="tr-TR"
+                                           class="dropdown-item">
+                                            <i class="flag-icin flag-icon-gb"></i>Turkish
+
+                                        </a>
+                                    </li>
+
+
+                                </ul>
+
+
+
+
+                            </div>
                         </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Confirmation" asp-action="Index">Management</a>
-                            </li>
-                        }
-                        
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()

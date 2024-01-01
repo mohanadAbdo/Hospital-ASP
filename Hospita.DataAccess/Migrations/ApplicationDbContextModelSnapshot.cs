@@ -407,6 +407,13 @@ namespace Hospita.DataAccess.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "123",
+                            RoleId = "072b142a-c7ef-4503-b22b-984cc00461cf"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -446,6 +453,25 @@ namespace Hospita.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "123",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "ac6e9dc2-2018-4d48-83a7-d91e6a2c575c",
+                            Email = "B201210561@sakarya.edu.tr",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedUserName = "B201210561@sakarya.edu.tr",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBdI3OTOdNEyn8d2BsB+jc6Db7rE3XhjrUpxdabP5OCjXCDeIrBzuQ+oHkzTEr340A==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "2574c94a-6f04-49f3-99cd-1d44d4a7e205",
+                            TwoFactorEnabled = false,
+                            UserName = "Admin",
+                            City = "Sakarya",
+                            TheName = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("Hospital.Models.Appointment", b =>

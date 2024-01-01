@@ -1,6 +1,9 @@
 ﻿@model IEnumerable<Doctor>
+@using Microsoft.AspNetCore.Mvc.Localization
 
+<h1>@_localization.Getkey("Hospital").Value</h1>
     <div class="row pb-3">
+        
     @foreach (var doctor in Model)
     {
         <div class="col-lg-3 col-sm-6">
@@ -16,7 +19,7 @@
                     <a asp-action="Details"
                       asp-route-doctorId="@doctor.Id"
                     class="btn btn-primary bg-gradient border-0 form-control" >
-                        Details
+                        @_localization.Getkey("Appointment").Value
                     </a> 
                 </div>
             </div>

@@ -69,7 +69,9 @@ namespace Mohanad_Hospital.Areas.Customer.Controllers
             includeProperties: "Doctor");
             AppointmentVM.AppointmentHeader.ApplicationUserId = userId;
             ApplicationUser applicationUser = _unitOfWork.ApplicationUser.Get(u => u.Id == userId);
-
+            Console.WriteLine(AppointmentVM.AppointmentHeader.TheName);
+            Console.WriteLine(AppointmentVM.AppointmentHeader.City);
+            Console.WriteLine(AppointmentVM.AppointmentHeader.AppointmentDate);
 
 
             AppointmentVM.AppointmentHeader.ApoointmentStatus = SD.StatusPending;
@@ -132,6 +134,26 @@ namespace Mohanad_Hospital.Areas.Customer.Controllers
             return RedirectToAction(nameof(AppointmentConfirmation),new {id = AppointmentVM.AppointmentHeader.Id});
 
 
+        }
+
+        [HttpGet]
+        public List<DateTime> GetAvilableAppointments(string date)
+        {
+            DateTime startOfDay = DateTime.Parse(date);
+            DateTime endOfDay = startOfDay.AddDays(1).AddSeconds(-1);
+            List<AppointmentHeader> appointments = _unitOfWork.AppointmentHeader.GetAll().ToList();
+            List<DateTime> availabeDates = new List<DateTime>();
+            for (int i = 0; i < 8; i++)
+            {
+                availabeDates.Add(startOfDay.AddHours(8 + i));
+            }
+
+            for (int i = 0; i < appointments.Count; i++) { 
+                if (appointments[i].AppointmentDate >= startOfDay && appointments[i].AppointmentDate < endOfDay && appointments[i].ApoointmentStatus == "Aproved") {
+                    availabeDates.Remove(appointments[i].AppointmentDate);
+                }
+            }
+            return availabeDates;
         }
         public IActionResult AppointmentConfirmation(int id)
         {

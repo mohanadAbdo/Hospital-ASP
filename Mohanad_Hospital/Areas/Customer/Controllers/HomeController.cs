@@ -4,6 +4,9 @@ using System.Diagnostics;
 using Hospital.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Localization;
+using WebProje.Services;
 
 namespace Mohanad_Hospital.Areas.Customer.Controllers
 {
@@ -11,16 +14,40 @@ namespace Mohanad_Hospital.Areas.Customer.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private LanguageService _localization;
         private readonly IUnitOfWork _unitOfWork;
-        public HomeController(ILogger<HomeController> logger,IUnitOfWork unitOfWork)
+        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork, LanguageService localization)
         {
+
             _logger = logger;
             _unitOfWork = unitOfWork;
+            _localization = localization;
         }
+
+        public IActionResult ChangeLanguage(string culture)
+        {
+            // Set the culture cookie
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions
+                {
+                    Expires = DateTimeOffset.UtcNow.AddYears(1)
+                }
+            );
+
+            // Redirect to the current URL to apply the new culture
+            return Redirect(Request.Headers["Referer"].ToString());
+        }
+
 
         public IActionResult Index()
         {
+            ViewBag.Welcom = _localization.Getkey("hi").Value;
+            var currentCulture = Thread.CurrentThread.CurrentCulture.Name;
             IEnumerable<Doctor> doctorList = _unitOfWork.Doctor.GetAll(includeProperties: "Category");
+           
+
             return View(doctorList);
         }
         public IActionResult Details(int doctorId)
@@ -28,6 +55,7 @@ namespace Mohanad_Hospital.Areas.Customer.Controllers
             Appointment appointment = new()
             {
                 Doctor = _unitOfWork.Doctor.Get(u => u.Id == doctorId, includeProperties: "Category"),
+                
 
                 DoctorId = doctorId
 

@@ -7,10 +7,10 @@
             <div class="card-header bg-dark text-light ml-0">
                 <div class="container row">
                     <div class="col-12 d-none d-md-block col-md-6 pb-1">
-                        <i class="fas fa-shopping-cart"></i> &nbsp; Order Summary
+                        <i class="fas fa-shopping-cart"></i> &nbsp; Appointment Summary
                     </div>
                     <div class="col-12 col-md-4 offset-md-2 text-right">
-                        <a asp-action="index" class="btn btn-outline-info form-control btn-sm">Back to Orders</a>
+                        <a asp-action="index" class="btn btn-outline-info form-control btn-sm">Back</a>
                     </div>
                 </div>
             </div>
@@ -20,7 +20,7 @@
                         <div class="col-12 col-lg-6 pb-4">
                             <div class="row">
                                 <h4 class="d-flex justify-content-between align-items-center mb-3">
-                                    <span class="text-primary">PickUp Details:</span>
+                                    <span class="text-primary"> Details:</span>
                                 </h4>
                             </div>
                             <div class="row my-1">
@@ -119,68 +119,7 @@
                                     }
                                 </div>
                             </div>
-                            @if (User.IsInRole(SD.Admin_Role))
-                            {
-                                <div class="row my-1">
-                                    <div class="col-3">Session ID</div>
-                                    <div class="col-9">
-                                        <input type="text" readonly class="form-control" />
-                                    </div>
-                                </div>
-
-                                <div class="row my-1">
-                                    <div class="col-3">Payment Intent ID</div>
-                                    <div class="col-9">
-                                        @if (User.IsInRole(SD.Admin_Role))
-                                        {
-                                            <input asp-for="AppointmentHeader.PaymentIntentId" type="text" class="form-control" />
-                                            <span asp-validation-for="AppointmentHeader.PaymentIntentId" class="text-danger"></span>
-
-
-                                        }
-                                        else
-                                        {
-                                            <input asp-for="AppointmentHeader.PaymentIntentId" readonly type="text" class="form-control" />
-                                        }
-                                    </div>
-                                </div>
-                            }
-                            <div class="row my-1">
-
-
-                                <div class="col-3">Payment Date</div>
-                                <div class="col-9">
-                                    @if (User.IsInRole(SD.Admin_Role))
-                                    {
-                                        <input asp-for="AppointmentHeader.PaymentDate" type="text" class="form-control" />
-                                        <span asp-validation-for="AppointmentHeader.PaymentDate" class="text-danger"></span>
-
-
-                                    }
-                                    else
-                                    {
-                                        <input asp-for="AppointmentHeader.PaymentDate" readonly type="text" class="form-control" />
-                                    }
-                                </div>
-
-                            </div>
-
-                            <div class="row my-1">
-                                <div class="col-3">Payment Status</div>
-                                <div class="col-9">
-                                    @if (User.IsInRole(SD.Admin_Role))
-                                    {
-                                        <input asp-for="AppointmentHeader.PaymentStatus" type="text" class="form-control" />
-                                        <span asp-validation-for="AppointmentHeader.PaymentStatus" class="text-danger"></span>
-
-
-                                    }
-                                    else
-                                    {
-                                        <input asp-for="AppointmentHeader.PaymentStatus" readonly type="text" class="form-control" />
-                                    }
-                                </div>
-                            </div>
+                           
                             @if (User.IsInRole(SD.Admin_Role))
                             {
                                 <button type="submit" asp-action="UpdateConfirmationDetail" class="btn btn-warning form-control my-1" >Update</button>
@@ -188,39 +127,12 @@
                         </div>
                         <div class="col-12 col-lg-5 offset-lg-1">
                             <h4 class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="text-primary">Order Summary</span>
+                                <span class="text-primary">Appointment Summary</span>
                             </h4>
 
-                            <ul class="list-group mb-3">
-
-                                <li class="list-group-item d-flex justify-content-between p-2">
-                                    <div class="row container">
-                                        <div class="col-8">
-
-                                            <h6 class="my-0 text-primary">Title</h6>
-                                            <small class="text-muted">Price : $$$</small><br />
-                                            <small class="text-muted">Quantity : XX</small>
-                                        </div>
-                                        <div class="col-4 text-end">
-                                            <p class="text-success">Count * Price</p>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li class="list-group-item bg-primary">
-                                    <div class="row container">
-                                        <div class="col-6">
-                                            <h5 class="text-white">TOTAL </h5>
-                                        </div>
-                                        <div class="col-6 text-end">
-                                            <h5 class="text-white">$$$$</h5>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                            <input type="submit" class="btn btn-success form-control my-1" value="Now" />
-                            <input type="submit" class="btn btn-primary form-control my-1" value="Start Processing" />
-                            <input type="submit" class="btn btn-danger form-control my-1" value="Cancel Order" />
+                          
+                            <button type="submit"asp-action="Aprove" class="btn btn-primary form-control my-1" value="Aproved">Aproved</button>
+                            <button asp-action="Cancel" type="submit" class="btn btn-danger form-control my-1" value="Cancel Order">Appointment Cancel </button>
                         </div>
                     </div>
                 </div>

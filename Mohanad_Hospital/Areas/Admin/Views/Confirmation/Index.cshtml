@@ -3,7 +3,7 @@
     var pending = "text-primary";
     var inprocess = "text-primary";
     var completed = "text-primary";
-    var approved = "text-primary";
+    var aproved = "text-primary";
     var all = "text-primary";
 
     switch (status)
@@ -17,8 +17,8 @@
         case "completed":
             completed = "active text-white bg-primary";
             break;
-        case "approved":
-            approved = "active text-white bg-primary";
+        case "aproved":
+            aproved = "active text-white bg-primary";
             break;
         default:
             all = "active text-white bg-primary";
@@ -53,8 +53,8 @@
                         </a>
                         <ul class="list-group list-group-horizontal-sm">
                             <a style="text-decoration:none" asp-controller="Confirmation" asp-action="Index"
-                               asp-route-status="approved">
-                            <li class="list-group-item @approved">Approved</li>
+                               asp-route-status="aproved">
+                            <li class="list-group-item @aproved">Aproved</li>
                             </a>
                             <ul class="list-group list-group-horizontal-sm">
                                 <a style="text-decoration:none" asp-controller="Confirmation" asp-action="Index"

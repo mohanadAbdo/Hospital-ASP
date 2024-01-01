@@ -13,8 +13,8 @@ $(document).ready(function () {
                 loadDataTable("pending");
             } else {
 
-                if (url.includes("approved")) {
-                    loadDataTable("approved");
+                if (url.includes("aproved")) {
+                    loadDataTable("aproved");
                 } else {
                     loadDataTable("all")
                 }

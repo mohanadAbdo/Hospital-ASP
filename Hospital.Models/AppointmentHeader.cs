@@ -17,6 +17,8 @@ namespace Hospital.Models
         [ForeignKey("ApplicationUserId")]
         [ValidateNever]
         public ApplicationUser ApplicationUser { get; set; }
+
+        [Required]
         public DateTime AppointmentDate { get; set; }
         public string? ApoointmentStatus { get; set; }
 
